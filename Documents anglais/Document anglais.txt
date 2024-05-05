@@ -1,0 +1,12 @@
+POWERSHELL :
+https://www.itprotoday.com/powershell/powershell-101-lesson-1
+https://searchwindowsserver.techtarget.com/definition/PowerShell
+
+MIGRATION VM :
+https://www.techopedia.com/definition/15033/virtual-machine-migration-vm-migration
+https://www.virtamove.com/blog/migrating-apps-by-hand-is-hard/
+
+HYPERVISEUR :
+https://www.pluralsight.com/blog/it-ops/what-is-hypervisor
+https://vapour-apps.com/what-is-hypervisor/
+https://www.networkworld.com/article/3243262/virtualization/what-is-a-hypervisor.html

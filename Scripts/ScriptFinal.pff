@@ -1,0 +1,456 @@
+﻿
+  <FileID>5136ebe5-9914-4697-b2b2-439470f8c261</FileID>
+  <FileVersion>1.2</FileVersion>
+  <Object type="System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="formProjetDindon" children="Controls">
+    <Property name="ClientSize">483, 419</Property>
+    <Property name="FormBorderStyle">Fixed3D</Property>
+    <Property name="MaximizeBox">False</Property>
+    <Property name="MinimizeBox">False</Property>
+    <Property name="Name">formProjetDindon</Property>
+    <Property name="StartPosition">CenterScreen</Property>
+    <Property name="Text">Projet Dindon</Property>
+    <Event name="Load">formProjetDindon_Load</Event>
+    <Object type="System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="buttonMappage" children="Controls">
+      <Property name="Enabled">False</Property>
+      <Property name="Font">Microsoft Sans Serif, 12pt, style=Bold</Property>
+      <Property name="Location">12, 184</Property>
+      <Property name="Name">buttonMappage</Property>
+      <Property name="Size">202, 80</Property>
+      <Property name="TabIndex">13</Property>
+      <Property name="Text">Création du partage réseau</Property>
+      <Property name="UseVisualStyleBackColor">True</Property>
+      <Event name="Click">buttonMappage_Click</Event>
+    </Object>
+    <Object type="System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="buttonExport" children="Controls">
+      <Property name="Enabled">False</Property>
+      <Property name="Font">Microsoft Sans Serif, 12pt, style=Bold</Property>
+      <Property name="Location">12, 270</Property>
+      <Property name="Name">buttonExport</Property>
+      <Property name="Size">202, 80</Property>
+      <Property name="TabIndex">12</Property>
+      <Property name="Text">Exporter les machines virtuelles</Property>
+      <Property name="UseVisualStyleBackColor">True</Property>
+      <Event name="Click">buttonExport_Click</Event>
+    </Object>
+    <Object type="System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="buttonTestConnexion" children="Controls">
+      <Property name="Font">Microsoft Sans Serif, 12pt, style=Bold</Property>
+      <Property name="Location">12, 98</Property>
+      <Property name="Name">buttonTestConnexion</Property>
+      <Property name="Size">202, 80</Property>
+      <Property name="TabIndex">11</Property>
+      <Property name="Text">Tester la connexion avec le nouveau serveur</Property>
+      <Property name="UseVisualStyleBackColor">True</Property>
+      <Event name="Click">buttonTestConnexion_Click</Event>
+    </Object>
+    <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelEtatVM3" children="Controls">
+      <Property name="BackColor">Red</Property>
+      <Property name="Font">Microsoft Sans Serif, 9pt</Property>
+      <Property name="Location">218, 120</Property>
+      <Property name="Name">labelEtatVM3</Property>
+      <Property name="Size">252, 44</Property>
+      <Property name="TabIndex">10</Property>
+      <Property name="TextAlign">MiddleCenter</Property>
+    </Object>
+    <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelEtatVM2" children="Controls">
+      <Property name="BackColor">Red</Property>
+      <Property name="Font">Microsoft Sans Serif, 9pt</Property>
+      <Property name="Location">218, 66</Property>
+      <Property name="Name">labelEtatVM2</Property>
+      <Property name="Size">252, 44</Property>
+      <Property name="TabIndex">9</Property>
+      <Property name="TextAlign">MiddleCenter</Property>
+    </Object>
+    <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelEtatVM1" children="Controls">
+      <Property name="BackColor">Red</Property>
+      <Property name="Font">Microsoft Sans Serif, 9pt</Property>
+      <Property name="Location">218, 12</Property>
+      <Property name="Name">labelEtatVM1</Property>
+      <Property name="Size">252, 44</Property>
+      <Property name="TabIndex">8</Property>
+      <Property name="TextAlign">MiddleCenter</Property>
+    </Object>
+    <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelInfo" children="Controls">
+      <Property name="Font">Microsoft Sans Serif, 18pt</Property>
+      <Property name="Location">12, 353</Property>
+      <Property name="Name">labelInfo</Property>
+      <Property name="Size">458, 62</Property>
+      <Property name="TabIndex">7</Property>
+      <Property name="TextAlign">MiddleCenter</Property>
+    </Object>
+    <Object type="System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="buttonStopVM" children="Controls">
+      <Property name="Font">Microsoft Sans Serif, 12pt, style=Bold</Property>
+      <Property name="Location">12, 12</Property>
+      <Property name="Name">buttonStopVM</Property>
+      <Property name="Size">202, 80</Property>
+      <Property name="TabIndex">6</Property>
+      <Property name="Text">Arrêter les machines virtuelles</Property>
+      <Property name="UseVisualStyleBackColor">True</Property>
+      <Event name="Click">buttonStopVM_Click</Event>
+    </Object>
+  </Object>
+  <Code><![CDATA[function OnApplicationLoad {
+	#Note: This function is not called in Projects
+	#Note: This function runs before the form is created
+	#Note: To get the script directory in the Packager use: Split-Path $hostinvocation.MyCommand.path
+	#Note: To get the console output in the Packager (Windows Mode) use: $ConsoleOutput (Type: System.Collections.ArrayList)
+	#Important: Form controls cannot be accessed in this function
+	#TODO: Add snapins and custom code to validate the application load
+	Import-Module BitsTransfer
+	Import-Module Hyper-V
+	
+	return $true #return true for success or false for failure
+}
+
+
+function OnApplicationExit {
+	#Note: This function is not called in Projects
+	#Note: This function runs after the form is closed
+	#TODO: Add custom code to clean up and unload snapins when the application exits
+	
+	$script:ExitCode = 0 #Set the exit code for the Packager
+}
+
+#######################################################################################
+
+function unlockButtons
+{
+
+	if (($script:funTestConnexion -eq $true) -and ($script:funMappage -ne $true))
+	{
+		$buttonMappage.Enabled = $true
+	}
+	
+	if (($script:funArretVM -eq $true) -and ($script:funMappage -eq $true))
+	{
+		$buttonExport.Enabled = $true
+	}
+	
+}
+
+#######################################################################################
+
+function etat-vm ($nomServeur) {
+	
+		$paraVM = Get-VM $nomServeur
+		$etatVM = $paraVM.state
+		return $etatVM
+}
+
+#######################################################################################
+
+function verif
+{
+	
+	$nomServeurs = $nomServeur1, $nomServeur2, $nomServeur3
+	
+	foreach ($nomServeur in $nomServeurs)
+	{
+	
+		$etatVM = etat-vm($nomServeur)
+	
+		if (((etat-vm $nomServeur) -eq "Off") -and ($nomServeur -eq $nomServeur1))
+		{
+			$labelEtatVM1.Text = "Le serveur " + $nomServeur + " est arrêté"
+			$labelEtatVM1.BackColor = 'Chartreuse'
+		}
+		
+		if (((etat-vm $nomServeur) -eq "Off") -and ($nomServeur -eq $nomServeur2))
+		{
+			$labelEtatVM2.Text = "Le serveur " + $nomServeur + " est arrêté"
+			$labelEtatVM2.BackColor = 'Chartreuse'
+		}
+		
+		if (((etat-vm $nomServeur) -eq "Off") -and ($nomServeur -eq $nomServeur3))
+		{
+			$labelEtatVM3.Text = "Le serveur " + $nomServeur + " est arrêté"
+			$labelEtatVM3.BackColor = 'Chartreuse'
+		}
+		
+		if (((etat-vm $nomServeur) -ne "Off") -and ($nomServeur -eq $nomServeur1))
+		{
+			$labelEtatVM1.Text = "Le serveur " + $nomServeur + " est démarré"
+			$labelEtatVM1.BackColor = 'Red'
+		}
+		
+		if (((etat-vm $nomServeur) -ne "Off") -and ($nomServeur -eq $nomServeur2))
+		{
+			$labelEtatVM2.Text = "Le serveur " + $nomServeur + " est démarré"
+			$labelEtatVM2.BackColor = 'Red'
+		}
+		
+		if (((etat-vm $nomServeur) -ne "Off") -and ($nomServeur -eq $nomServeur3))
+		{
+			$labelEtatVM3.Text = "Le serveur " + $nomServeur + " est démarré"
+			$labelEtatVM3.BackColor = 'Red'
+		}
+	}
+	
+	if (((etat-vm($nomServeur1)) -eq "Off") -and ((etat-vm($nomServeur2)) -eq "Off") -and ((etat-vm($nomServeur3)) -eq "Off"))
+	{
+		$buttonStopVM.backcolor = 'Chartreuse'
+		$buttonStopVM.Text = "Machines éteintes"
+		$buttonStopVM.Enabled = $false
+		$script:funArretVM = $true
+		
+	}
+}
+
+#######################################################################################
+
+function arret-vm 
+{
+	$script:funArretVM = $false
+	
+	if ((etat-vm $nomServeur1) -ne "Off")
+	{	
+		$labelEtatVM1.Text =  "Le serveur " + $nomServeur1 + " est en attente"
+		$labelEtatVM1.BackColor = 'Gold'
+	}
+		
+	if ((etat-vm $nomServeur2) -ne "Off")
+	{
+		$labelEtatVM2.Text = "Le serveur " + $nomServeur2 + " est en attente"
+		$labelEtatVM2.BackColor = 'Gold'
+	}
+	
+	if ((etat-vm $nomServeur3) -ne "Off")
+	{
+		$labelEtatVM3.Text =  "Le serveur " + $nomServeur3 + " est en attente"
+		$labelEtatVM3.BackColor = 'Gold'
+	}
+	
+	$nomServeurs = $nomServeur1, $nomServeur2, $nomServeur3
+	
+	foreach ($nomServeur in $nomServeurs)
+	{
+		$i = 0
+		
+		while (((etat-vm $nomServeur) -ne "Off") -and ($i -lt 10))
+		{
+			$labelInfo.Text = $nomServeur + " est en cours d'arrêt"
+			Stop-VM $nomServeur
+			$i = $i + 1
+		}
+		
+		if ($i -ge 10)
+		{
+			[void][System.Windows.Forms.MessageBox]::Show("Arrêt de " + $nomServeur + " impossible, veuillez contacter le service support.","ERREUR")	
+		}
+		verif
+	}
+	
+	$labelInfo.Text = ""
+}
+
+#######################################################################################
+
+function testConnexion
+{
+	$script:funTestConnexion = $false
+	
+	$buttonTestConnexion.Text = "Test de connexion en cours..."
+	$buttonTestConnexion.BackColor = 'Gold'
+	
+	$etatReseau = Test-Connection 10.$env:octet2.$env:octet3.109 -Quiet  
+	
+	if ($etatReseau -eq $true) 
+	{	
+		$buttonTestConnexion.Text = "Connexion réussie"
+		$buttonTestConnexion.Backcolor = 'Chartreuse'
+		$buttonTestConnexion.Enabled = $false
+		$script:funTestConnexion = $true
+			
+	}
+	else 
+	{
+		$buttonTestConnexion.Text = "Aucune connexion Reconnexion ?"
+		$buttonTestConnexion.Backcolor = 'red'
+	}
+	
+}
+
+#######################################################################################
+
+function MappageReseau
+{	
+	try
+	{
+		$buttonMappage.BackColor = 'gold'
+		$buttonMappage.Text = "Mappage en cours ..."
+		
+		$user = ("HV" + $env:codehex + "01\Administrateur")
+		net use w: \\10.$env:octet2.$env:octet3.109\d$ /user:$user "P@ssword1"
+		
+		$user = ("HV" + $env:codehex + "01\Administrateur")
+		net use x: \\10.$env:octet2.$env:octet3.109\d$ /user:$user "P@ssword1"
+		
+		$buttonMappage.Enabled = $false
+		$buttonMappage.BackColor = 'chartreuse'
+		$buttonMappage.Text = "Mappage terminé."
+		$script:funMappage = $true
+	}
+	
+	catch
+	{
+		$buttonMappage.Backcolor = 'red'
+		$buttonMappage.Text = "Echec du mappage Réessayer ?"
+		[void][System.Windows.Forms.MessageBox]::Show("Echec du mappage réseau.","ERREUR")
+	}
+}
+
+#######################################################################################
+
+function ExportVM
+{
+	$labelEtatVM1.Text = "Le serveur " + $nomServeur1 + " est en attente"
+	$labelEtatVM1.BackColor = 'Gold'
+
+	$labelEtatVM2.Text = "Le serveur " + $nomServeur2 + " est en attente"
+	$labelEtatVM2.BackColor = 'Gold'
+
+	$labelEtatVM3.Text = "Le serveur " + $nomServeur3 + " est en attente"
+	$labelEtatVM3.BackColor = 'Gold'
+	
+	$nomServeurs = ($nomServeur1, $nomServeur2, $nomServeur3)
+	
+	foreach ($nomServeur in $nomServeurs)
+	{
+		
+		$labelInfo.Text = "Le serveur " + $nomServeur + " est en cours d'exportation"
+		
+		if ($nomServeur -eq $nomServeur1)
+		{
+			$labelEtatVM1.Text = "Exportation de " + $nomServeur + " en cours"
+			$labelEtatVM1.BackColor = 'Gold'
+		}
+		
+		if ($nomServeur -eq $nomServeur2)
+		{
+			$labelEtatVM2.Text = "Exportation de " + $nomServeur + " en cours"
+			$labelEtatVM2.BackColor = 'Gold'
+		}
+		
+		if ($nomServeur -eq $nomServeur3)
+		{
+			$labelEtatVM3.Text = "Exportation de " + $nomServeur + " en cours"
+			$labelEtatVM3.BackColor = 'Gold'
+		}
+		
+		Export-VM $nomServeur -Path X:
+		
+		if ($nomServeur -eq $nomServeur1)
+		{
+			$labelEtatVM1.Text = "Exportation de " + $nomServeur + " terminé"
+			$labelEtatVM1.BackColor = 'Chartreuse'
+		}
+		
+		if ($nomServeur -eq $nomServeur2)
+		{
+			$labelEtatVM2.Text = "Exportation de " + $nomServeur + " terminé"
+			$labelEtatVM2.BackColor = 'Chartreuse'
+		}
+		
+		if ($nomServeur -eq $nomServeur3)
+		{
+			$labelEtatVM3.Text = "Exportation de " + $nomServeur + " terminé"
+			$labelEtatVM3.BackColor = 'Chartreuse'
+		}
+		
+	}
+	$labelInfo.Text = ""
+	
+}
+#######################################################################################
+
+$formProjetDindon_Load={
+	
+	$labelEtatVM1.Text = "Le serveur " + $nomServeur1 + " est démarré"
+	$labelEtatVM2.Text = "Le serveur " + $nomServeur2 + " est démarré"
+	$labelEtatVM3.Text = "Le serveur " + $nomServeur3 + " est démarré"
+	
+	$script:nomServeur1 = ("IF" + $env:codehex + "01VM")
+	$script:nomServeur2 = ("SR" + $env:codehex + "01VM")
+	$script:nomServeur3 = ("SR" + $env:codehex + "02VM")
+	
+	verif
+}
+
+$buttonStopVM_Click={
+
+	arret-vm
+	unlockButtons
+}
+
+$buttonTestConnexion_Click={
+
+	testConnexion
+	unlockButtons
+}
+
+$buttonMappage_Click={
+
+	MappageReseau
+	unlockButtons
+}
+
+$buttonExport_Click={
+
+	ExportVM
+}]]></Code>
+  <Mode>1</Mode>
+  <Assemblies>
+    <Assembly>System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</Assembly>
+    <Assembly>mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <Assembly>System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.DirectoryServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <Assembly>System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.ServiceProcess, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+  </Assemblies>
+  <Packager>
+    <General>
+      <PackageName>
+      </PackageName>
+      <PackageIcon>
+      </PackageIcon>
+      <ManifestCreation>1</ManifestCreation>
+      <CustomManifest>
+      </CustomManifest>
+      <Platform>-1</Platform>
+      <RunSTA>0</RunSTA>
+      <PowerShellVersion>2</PowerShellVersion>
+    </General>
+    <Security>
+      <Username>
+      </Username>
+      <Password>
+      </Password>
+      <SignPackage>False</SignPackage>
+      <Certificate>
+      </Certificate>
+      <CertificatePassword>
+      </CertificatePassword>
+      <RunAs>0</RunAs>
+    </Security>
+    <Version>
+      <FileVersion>1.0.0.0</FileVersion>
+      <ProductVersion>1.0.0.0</ProductVersion>
+      <ProductName>
+      </ProductName>
+      <Description>
+      </Description>
+      <Company>
+      </Company>
+      <Copyright>
+      </Copyright>
+      <InternalName>
+      </InternalName>
+      <OriginalFileName>
+      </OriginalFileName>
+      <Comment>
+      </Comment>
+    </Version>
+  </Packager>
